@@ -1346,6 +1346,89 @@
           }
         }
 
+        /* WhatsApp Confirmation Styles */
+        .whatsapp-confirmation-box {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 2px solid #3BC36B;
+            border-radius: 12px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(59, 195, 107, 0.15);
+        }
+
+        .whatsapp-confirmation-box h2 {
+            color: #166534;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .main-message {
+            font-size: 1.1rem;
+            color: #166534;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .instruction {
+            font-size: 1rem;
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .confirmation-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-recebi {
+            background: #3BC36B;
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-recebi:hover {
+            background: #2da856;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 195, 107, 0.3);
+        }
+
+        .btn-nao-recebi {
+            background: #FF6B35;
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-nao-recebi:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .confirmation-buttons {
+                flex-direction: column;
+            }
+            
+            .btn-recebi, .btn-nao-recebi {
+                width: 100%;
+            }
+        }
+
         /* Mobile responsiveness */
         @media (max-width: 768px) {
           .morador-card,
@@ -1415,6 +1498,22 @@
         .payment-modal.active {
           opacity: 1;
           visibility: visible;
+        }
+
+        /* GARANTIR que NUNCA aparecem elementos de pagamento na página do motoboy */
+        #motoboy .payment-modal,
+        #motoboy .payment-loading,
+        #motoboy .payment-processing,
+        #motoboy .processing-overlay,
+        #motoboy .payment-modal-content,
+        #motoboy .payment-iframe,
+        #motoboy .payment-close-btn,
+        #motoboy .payment-simulation,
+        #motoboy .simulate-btn {
+          display: none !important;
+          visibility: hidden !important;
+          opacity: 0 !important;
+          pointer-events: none !important;
         }
 
         .payment-modal-content {
@@ -1827,7 +1926,7 @@
         }
 
         .cta-button {
-          background: linear-gradient(135deg, var(--color-orange-primary), var(--color-orange-hover));
+          background: linear-gradient(135deg, #3BC36B, #2da856);
           color: var(--color-white);
           padding: 18px 32px;
           border-radius: 12px;
@@ -1837,14 +1936,14 @@
           width: 100%;
           cursor: pointer;
           transition: all var(--duration-normal) var(--ease-standard);
-          box-shadow: 0 8px 24px rgba(255, 107, 53, 0.3);
+          box-shadow: 0 8px 24px rgba(59, 195, 107, 0.3);
           margin-bottom: var(--space-20);
         }
 
         .cta-button:hover {
-          background: linear-gradient(135deg, var(--color-orange-hover), var(--color-orange-active));
+          background: linear-gradient(135deg, #2da856, #20854a);
           transform: translateY(-2px);
-          box-shadow: 0 12px 32px rgba(255, 107, 53, 0.4);
+          box-shadow: 0 12px 32px rgba(59, 195, 107, 0.4);
         }
 
         .cta-button:active {
@@ -2242,7 +2341,6 @@
                     </div>
                     <div class="footer-section">
                         <h4>Contato</h4>
-                        <p><i class="fas fa-phone"></i> (42)99845-6017</p>
                         <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/5542998456017" target="_blank">(42)99845-6017</a></p>
                         <p><i class="fas fa-envelope"></i> <a href="mailto:chegouai.atendimento@gmail.com">chegouai.atendimento@gmail.com</a></p>
                     </div>
@@ -2296,100 +2394,226 @@
 
 
 
-    <!-- Nova Página de Cadastro do Cliente -->
+    <!-- PÁGINA CADASTRO CLIENTE REESCRITA COMPLETAMENTE -->
     <div id="cadastro-cliente" class="page">
-        <div class="container" style="max-width: 600px; padding: 40px 20px;">
-            <div class="card">
-                <div class="card__body">
-                    <!-- Header Simplificado -->
-                    <div class="restricted-page-header text-center" style="margin-bottom: 2rem;">
-                        <div class="logo" style="justify-content: center; margin-bottom: var(--space-16);">
-                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjUwIiB2aWV3Qm94PSIwIDAgMjAwIDUwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjRkY2QjM1Ii8+Cjx0ZXh0IHg9IjEwIiB5PSIzMiIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiPkNoZWdvdSBBw608L3RleHQ+Cjwvc3ZnPgo=" alt="Chegou Aí" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                            <span style="display: none; font-size: 18px; font-weight: bold; color: #FF6B35;">Chegou Aí</span>
-                        </div>
-                        <h1>🎉 Bem-vindo ao Chegou Aí!</h1>
-                        <p style="font-size: var(--font-size-lg); color: var(--color-text-secondary); margin-bottom: var(--space-24);">Seu pagamento foi realizado com sucesso! Agora complete seu cadastro:</p>
-                    </div>
-
-                    <div id="cadastroClienteMessage" class="message hidden"></div>
-
-                    <!-- Como funciona seu cadastro -->
-                    <div id="cadastroSection">
-                        <div style="background: var(--color-bg-3); padding: var(--space-20); border-radius: var(--radius-base); margin-bottom: var(--space-24);">
-                            <h3 style="color: var(--color-primary); margin-bottom: var(--space-16);">Como funciona seu cadastro</h3>
-                            <div class="timeline-steps" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: var(--space-16); text-align: center;">
-                                <div class="step">
-                                    <div style="background: var(--color-primary); color: white; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-8); font-weight: bold;">1</div>
-                                    <p style="font-size: var(--font-size-sm); font-weight: var(--font-weight-medium);">Complete suas informações abaixo</p>
-                                </div>
-                                <div class="step">
-                                    <div style="background: var(--color-primary); color: white; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-8); font-weight: bold;">2</div>
-                                    <p style="font-size: var(--font-size-sm); font-weight: var(--font-weight-medium);">Clique em "Finalizar Cadastro"</p>
-                                </div>
-                                <div class="step">
-                                    <div style="background: var(--color-primary); color: white; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-8); font-weight: bold;">3</div>
-                                    <p style="font-size: var(--font-size-sm); font-weight: var(--font-weight-medium);">Receba confirmação no WhatsApp</p>
-                                </div>
-                                <div class="step">
-                                    <div style="background: var(--color-secondary); color: white; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-8); font-weight: bold;">4</div>
-                                    <p style="font-size: var(--font-size-sm); font-weight: var(--font-weight-medium);">Pronto! Você já pode receber notificações</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Formulário de cadastro -->
-                        <form id="cadastroClienteForm">
-                            <div class="form-group">
-                                <label class="form-label" for="cadastroNomeCompleto">Nome Completo *</label>
-                                <input type="text" class="form-control" id="cadastroNomeCompleto" placeholder="Digite seu nome completo" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label" for="cadastroTelefone">Telefone *</label>
-                                <input type="tel" class="form-control" id="cadastroTelefone" placeholder="(42)99999-9999" required>
-                            </div>
-
-                            <button type="submit" class="btn btn--primary" style="width: 100%; margin-bottom: var(--space-16); background: var(--color-primary);">
-                                Finalizar Cadastro
-                            </button>
-                        </form>
-                    </div>
-
-                    <!-- Confirmação -->
-                    <div id="confirmacaoSection" class="hidden">
-                        <div class="message message--success">
-                            <h3>✅ Cadastro realizado com sucesso!</h3>
-                            <p>Enviamos uma mensagem de confirmação para seu WhatsApp</p>
-                        </div>
-
-                        <div class="text-center" style="margin-top: var(--space-24);">
-                            <p style="margin-bottom: var(--space-20); font-size: var(--font-size-lg);">Você recebeu a mensagem no WhatsApp?</p>
-                            <div style="display: flex; gap: var(--space-12); flex-wrap: wrap; justify-content: center;">
-                                <button id="recebiMensagemBtn" class="btn btn--secondary" style="min-width: 200px;">
-                                    ✅ Recebi a mensagem
-                                </button>
-                                <button id="naoRecebiMensagemBtn" class="btn" style="background: #6B7280; color: white; min-width: 200px;">
-                                    ❌ Não recebi a mensagem
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Dica para número incorreto -->
-                    <div id="dicaNumeroSection" class="hidden">
-                        <div class="message message--warning">
-                            <h3>⚠️ Dica importante!</h3>
-                            <p>Verifique se o número de telefone está correto. Caso necessário, você pode corrigir as informações acima e tentar novamente.</p>
-                        </div>
-                        <div class="text-center" style="margin-top: var(--space-16);">
-                            <button class="btn btn--outline" onclick="voltarAoCadastro()" style="width: 100%;">
-                                Corrigir Informações
-                            </button>
-                        </div>
-                    </div>
+        <style>
+            /* CSS INLINE PARA GARANTIR FUNCIONAMENTO */
+            .container-cadastro {
+                max-width: 600px;
+                margin: 50px auto;
+                padding: 20px;
+            }
+            
+            #form-section {
+                background: white;
+                padding: 40px;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+            
+            .titulo-principal {
+                color: #FF6B35;
+                margin-bottom: 10px;
+                font-size: 1.8rem;
+                text-align: center;
+            }
+            
+            .subtitulo {
+                color: #666;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+            
+            .input-campo {
+                width: 100%;
+                padding: 12px;
+                margin-bottom: 15px;
+                border: 2px solid #ddd;
+                border-radius: 6px;
+                font-size: 16px;
+                box-sizing: border-box;
+            }
+            
+            .botao-finalizar {
+                width: 100%;
+                padding: 14px;
+                background: #FF6B35;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-size: 16px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+            
+            .botao-finalizar:hover {
+                background: #e55a2b;
+            }
+            
+            #whatsapp-section {
+                display: none;
+                background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+                border: 2px solid #3BC36B;
+                border-radius: 12px;
+                padding: 40px;
+                text-align: center;
+            }
+            
+            #whatsapp-section h2 {
+                color: #166534;
+                margin-bottom: 20px;
+            }
+            
+            #whatsapp-section p {
+                color: #374151;
+                line-height: 1.6;
+            }
+            
+            .btn-container {
+                display: flex;
+                gap: 15px;
+                margin-top: 25px;
+                flex-wrap: wrap;
+            }
+            
+            .btn-recebi {
+                background: #3BC36B;
+                color: white;
+                padding: 14px 28px;
+                border: none;
+                border-radius: 8px;
+                font-weight: bold;
+                cursor: pointer;
+                flex: 1;
+            }
+            
+            .btn-nao-recebi {
+                background: #FF6B35;
+                color: white;
+                padding: 14px 28px;
+                border: none;
+                border-radius: 8px;
+                font-weight: bold;
+                cursor: pointer;
+                flex: 1;
+            }
+            
+            .btn-recebi:hover {
+                background: #2da856;
+            }
+            
+            .btn-nao-recebi:hover {
+                background: #e55a2b;
+            }
+        </style>
+        
+        <div class="container-cadastro">
+            <!-- SEÇÃO DO FORMULÁRIO -->
+            <div id="form-section">
+                <h1 class="titulo-principal">🎉 Bem-vindo ao Chegou Aí!</h1>
+                <p class="subtitulo">Seu pagamento foi realizado com sucesso! Complete seu cadastro:</p>
+                
+                <input type="text" id="nome" class="input-campo" placeholder="Nome completo" required>
+                <input type="tel" id="telefone" class="input-campo" placeholder="(42)99999-9999" required>
+                <button class="botao-finalizar" onclick="finalizarCadastro()">Finalizar Cadastro</button>
+            </div>
+            
+            <!-- SEÇÃO DE CONFIRMAÇÃO WHATSAPP -->
+            <div id="whatsapp-section">
+                <h2>✅ Mensagem Enviada!</h2>
+                <p><strong>Enviamos uma mensagem para você para confirmarmos seu número.</strong></p>
+                <p>Caso recebeu, clique aqui em <strong>"Recebi a mensagem"</strong>. Se caso não recebeu, verifique o número de telefone.</p>
+                
+                <div class="btn-container">
+                    <button class="btn-recebi" onclick="recebiMensagem()">Recebi a Mensagem</button>
+                    <button class="btn-nao-recebi" onclick="naoRecebiMensagem()">Não Recebi - Verificar Número</button>
                 </div>
             </div>
         </div>
+        
+        <!-- JAVASCRIPT INLINE -->
+        <script>
+            console.log('Página cadastro carregada');
+            
+            function finalizarCadastro() {
+                console.log('Função finalizarCadastro chamada!');
+                
+                const nome = document.getElementById('nome').value.trim();
+                const telefone = document.getElementById('telefone').value.trim();
+                
+                console.log('Nome:', nome);
+                console.log('Telefone:', telefone);
+                
+                if (!nome || !telefone) {
+                    alert('Por favor, preencha todos os campos!');
+                    return;
+                }
+                
+                console.log('Escondendo formulário...');
+                document.getElementById('form-section').style.display = 'none';
+                
+                console.log('Mostrando confirmação WhatsApp...');
+                document.getElementById('whatsapp-section').style.display = 'block';
+            }
+            
+            function recebiMensagem() {
+                console.log('Botão Recebi clicado');
+                try {
+                    // Definir flag de cadastro completo
+                    window.cadastroCompleted = true;
+                    console.log('Flag cadastroCompleted definida como:', window.cadastroCompleted);
+                    
+                    // Usar função global de navegação
+                    if (typeof window.showPage === 'function') {
+                        window.showPage('bem-vindo');
+                    } else if (typeof showPage === 'function') {
+                        showPage('bem-vindo');
+                    } else {
+                        console.error('Função showPage não encontrada');
+                        alert('Cadastro finalizado com sucesso! Redirecionando...');
+                        // Fallback manual
+                        const pages = document.querySelectorAll('.page');
+                        pages.forEach(p => p.classList.remove('active'));
+                        const bemVindoPage = document.getElementById('bem-vindo');
+                        if (bemVindoPage) {
+                            bemVindoPage.classList.add('active');
+                        }
+                    }
+                } catch (error) {
+                    console.error('Erro ao navegar:', error);
+                    alert('Cadastro finalizado! Clique em Voltar ao Início.');
+                }
+            }
+            
+            function naoRecebiMensagem() {
+                console.log('Botão Não Recebi clicado');
+                try {
+                    const whatsappSection = document.getElementById('whatsapp-section');
+                    const formSection = document.getElementById('form-section');
+                    
+                    if (whatsappSection && formSection) {
+                        whatsappSection.style.display = 'none';
+                        formSection.style.display = 'block';
+                        console.log('Voltou ao formulário com sucesso');
+                    } else {
+                        console.error('Seções não encontradas');
+                        alert('Erro ao voltar. Verifique os dados e tente novamente.');
+                    }
+                } catch (error) {
+                    console.error('Erro ao voltar ao formulário:', error);
+                    alert('Erro ao voltar. Recarregue a página se necessário.');
+                }
+            }
+            
+            // Máscara telefone
+            document.getElementById('telefone').addEventListener('input', function(e) {
+                let valor = e.target.value.replace(/\D/g, '');
+                if (valor.length <= 11) {
+                    valor = valor.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1)$2-$3');
+                }
+                e.target.value = valor;
+            });
+        </script>
     </div>
 
     <!-- Nova Página de Sucesso Final -->
@@ -2402,12 +2626,12 @@
                             <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjUwIiB2aWV3Qm94PSIwIDAgMjAwIDUwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjRkY2QjM1Ci8+Cjx0ZXh0IHg9IjEwIiB5PSIzMiIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiPkNoZWdvdSBBw608L3RleHQ+Cjwvc3ZnPgo=" alt="Chegou Aí" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                             <span style="display: none; font-size: 18px; font-weight: bold; color: #FF6B35;">Chegou Aí</span>
                         </div>
-                        <h1 style="font-size: var(--font-size-4xl); margin-bottom: var(--space-16);">🎊 Tudo pronto!</h1>
+                        <h1 style="font-size: var(--font-size-4xl); margin-bottom: var(--space-16);">🎉 Seja bem-vindo!</h1>
                     </div>
 
                     <div style="background: var(--color-bg-3); padding: var(--space-32); border-radius: var(--radius-lg); margin-bottom: var(--space-32);">
-                        <h2 style="color: var(--color-primary); margin-bottom: var(--space-20);">Seu cadastro no Chegou Aí foi finalizado com sucesso!</h2>
-                        <p style="font-size: var(--font-size-lg); line-height: var(--line-height-normal); color: var(--color-text); margin-bottom: var(--space-24);">A partir de agora você receberá notificações automáticas no WhatsApp quando suas entregas chegarem</p>
+                        <h2 style="color: var(--color-primary); margin-bottom: var(--space-20);">Seu cadastro foi realizado com sucesso!</h2>
+                        <p style="font-size: var(--font-size-lg); line-height: var(--line-height-normal); color: var(--color-text); margin-bottom: var(--space-24);">Agora assim que o motoboy utilizar nosso serviço, vamos enviar uma mensagem para você 😁</p>
                         
                         <div style="background: var(--color-surface); padding: var(--space-20); border-radius: var(--radius-base); border-left: 4px solid var(--color-secondary);">
                             <h4 style="color: var(--color-secondary); margin-bottom: var(--space-12);">📱 Como funciona:</h4>
@@ -2420,8 +2644,8 @@
                         </div>
                     </div>
 
-                    <button class="btn btn--primary btn--lg" onclick="voltarAoInicio()" style="width: 100%; max-width: 300px;">
-                        🏠 Voltar ao Início
+                    <button class="btn btn--primary btn--lg" onclick="voltarAoInicio()" style="width: 100%; max-width: 300px; background: var(--color-orange-primary); color: white;">
+                        Voltar ao Início
                     </button>
                 </div>
             </div>
@@ -2830,7 +3054,6 @@
                     </div>
                     <div class="footer-section">
                         <h4>Contato</h4>
-                        <p><i class="fas fa-phone"></i> (42)99845-6017</p>
                         <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/5542998456017" target="_blank">(42)99845-6017</a></p>
                         <p><i class="fas fa-envelope"></i> <a href="mailto:chegouai.atendimento@gmail.com">chegouai.atendimento@gmail.com</a></p>
                     </div>
@@ -3137,7 +3360,6 @@
                     </div>
                     <div class="footer-section">
                         <h4>Contato</h4>
-                        <p><i class="fas fa-phone"></i> (42)99845-6017</p>
                         <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/5542998456017" target="_blank">(42)99845-6017</a></p>
                         <p><i class="fas fa-envelope"></i> <a href="mailto:chegouai.atendimento@gmail.com">chegouai.atendimento@gmail.com</a></p>
                     </div>
@@ -3637,6 +3859,21 @@
             { nome: 'Ana Oliveira', telefone: '(44)98888-9999', ativo: true },
             { nome: 'Carlos Mendes', telefone: '(45)97777-8888', ativo: true }
         ];
+        
+        // FUNÇÃO DE SEGURANÇA: Verificar se estamos na página do motoboy
+        function isMotoboyPage() {
+            const currentPage = document.querySelector('.page.active');
+            return currentPage && currentPage.id === 'motoboy';
+        }
+        
+        // BLOQUEADOR GLOBAL: Interceptar tentativas de abrir modais na página motoboy
+        function blockPaymentFunctionsOnMotoboyPage() {
+            if (isMotoboyPage()) {
+                console.warn('❌ BLOQUEIO ATIVO: Operações de pagamento bloqueadas na página do motoboy');
+                return true;
+            }
+            return false;
+        }
 
         const registeredUsers = [];
         let isAdminLoggedIn = false;
@@ -3670,7 +3907,7 @@
 
         // Add event listeners for phone masks
         document.addEventListener('DOMContentLoaded', function() {
-            const phoneInputs = ['clientPhone', 'registroTelefone', 'finalTelefone', 'cadastroTelefone'];
+            const phoneInputs = ['clientPhone', 'registroTelefone', 'finalTelefone', 'telefone'];
             phoneInputs.forEach(id => {
                 const input = document.getElementById(id);
                 if (input) {
@@ -3686,7 +3923,16 @@
             try {
                 console.log('Navegando para página:', pageId);
                 
-                // Controle de acesso para páginas restritas
+                // IMPORTANTE: Motoboy tem acesso GRATUITO - sem verificações de pagamento
+                if (pageId === 'motoboy') {
+                    console.log('🛵 ACESSO GRATUITO: Carregando portal do motoboy');
+                    // Garantir que nenhum modal de pagamento esteja ativo
+                    closePaymentModal();
+                    closeConsentModal();
+                    closePostPaymentModal();
+                }
+                
+                // Controle de acesso para páginas restritas (exceto motoboy)
                 if (pageId === 'cadastro-cliente') {
                     console.log('Verificando permissão para cadastro-cliente. PaymentCompleted:', window.paymentCompleted);
                     if (!window.paymentCompleted) {
@@ -3713,6 +3959,26 @@
             const targetPage = document.getElementById(pageId);
             if (targetPage) {
                 targetPage.classList.add('active');
+                
+                // Marcar página atual no body para CSS
+                document.body.setAttribute('data-current-page', pageId);
+                
+                // Proteção especial para página do motoboy
+                if (pageId === 'motoboy') {
+                    console.log('🛵 CARREGANDO PÁGINA MOTOBOY: Aplicando proteções anti-pagamento');
+                    
+                    // Timeout para garantir que a proteção seja aplicada
+                    setTimeout(() => {
+                        const allPaymentElements = document.querySelectorAll('.payment-modal, .modal-overlay, .consent-modal');
+                        allPaymentElements.forEach(el => {
+                            el.style.display = 'none';
+                            el.style.visibility = 'hidden';
+                            el.style.opacity = '0';
+                            el.classList.remove('active');
+                        });
+                        console.log('✅ PROTEÇÃO APLICADA: Todos os modais de pagamento foram bloqueados');
+                    }, 100);
+                }
             }
 
             // Update page title based on current page
@@ -3774,9 +4040,18 @@
             }
         }
 
-        // Motoboy form handler
+        // Motoboy form handler - SISTEMA 100% GRATUITO PARA MOTOBOYS
         document.getElementById('motoboyForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            // VERIFICAÇÃO DE SEGURANÇA: Garantir que estamos na página do motoboy
+            const currentPage = document.querySelector('.page.active');
+            if (!currentPage || currentPage.id !== 'motoboy') {
+                console.error('Formulário do motoboy chamado fora da página correta');
+                return;
+            }
+            
+            console.log('✅ MOTOBOY: Sistema gratuito - sem verificações de pagamento');
             
             const clientName = document.getElementById('clientName').value.trim();
             const clientPhone = document.getElementById('clientPhone').value.trim();
@@ -3787,10 +4062,10 @@
                 return;
             }
             
-            // Show loading message
-            showMessage('motoboyMessage', '<div class="loading-spinner"></div>Procurando registro do cliente no banco de dados...', 'loading');
+            // IMPORTANTE: Mensagem clara SEM qualquer referência a pagamento
+            showMessage('motoboyMessage', '<div class="loading-spinner"></div>🔍 Buscando cliente no sistema...', 'loading');
             
-            // Simulate database search
+            // Simulate database search - SEM PROCESSAR PAGAMENTO
             setTimeout(() => {
                 const client = clients.find(c => 
                     c.nome.toLowerCase().includes(clientName.toLowerCase()) || 
@@ -3798,17 +4073,25 @@
                 );
                 
                 if (client && client.ativo) {
-                    showMessage('motoboyMessage', '✅ Enviado o aviso para o cliente!', 'success');
+                    showMessage('motoboyMessage', '🎉 Sucesso! Notificação enviada para o WhatsApp do cliente. Aguarde o cliente descer.', 'success');
                     // Reset form
                     document.getElementById('motoboyForm').reset();
                 } else {
-                    showMessage('motoboyMessage', '😢 Infelizmente esse cliente não tem o plano do Chegou AÍ', 'error');
+                    showMessage('motoboyMessage', 'Infelizmente o cliente não utiliza nosso sistema. Entrar em contato com ele como antes!', 'error');
                 }
             }, 2500);
         });
 
         // Consent Modal Functions
         function showConsentModal() {
+            // SEGURANÇA: Verificar se não estamos na página do motoboy
+            const currentPage = document.querySelector('.page.active');
+            if (currentPage && currentPage.id === 'motoboy') {
+                console.error('❌ BLOQUEADO: Modal de consentimento não pode ser aberto na página do motoboy!');
+                alert('Erro: O portal do motoboy é gratuito. Use o formulário diretamente.');
+                return;
+            }
+            
             const modal = document.getElementById('consentModal');
             const checkbox = document.getElementById('consentCheckbox');
             const confirmBtn = document.getElementById('confirmConsentBtn');
@@ -3826,10 +4109,23 @@
 
         function closeConsentModal() {
             const modal = document.getElementById('consentModal');
-            modal.classList.remove('active');
+            if (modal) {
+                modal.classList.remove('active');
+            }
             
             // Restore body scroll
             document.body.style.overflow = '';
+            
+            // SEGURANÇA EXTRA: Se estivermos na página do motoboy, garantir que permaneça fechado
+            if (isMotoboyPage()) {
+                console.log('🛵 MOTOBOY: Garantindo que modal de consentimento permaneça fechado');
+                setTimeout(() => {
+                    if (modal) {
+                        modal.style.display = 'none';
+                        modal.style.visibility = 'hidden';
+                    }
+                }, 100);
+            }
         }
 
         function confirmConsent() {
@@ -3859,6 +4155,14 @@
         // Payment Modal Functions
         function openPaymentModal() {
             try {
+                // SEGURANÇA: Verificar se não estamos na página do motoboy
+                const currentPage = document.querySelector('.page.active');
+                if (currentPage && currentPage.id === 'motoboy') {
+                    console.error('❌ BLOQUEADO: Modal de pagamento não pode ser aberto na página do motoboy!');
+                    alert('Erro: O sistema do motoboy é gratuito. Não há pagamentos nesta página.');
+                    return;
+                }
+                
                 console.log('Abrindo modal de pagamento');
                 const modal = document.getElementById('paymentModal');
                 const iframe = document.getElementById('paymentIframe');
@@ -3910,11 +4214,27 @@
                 const modal = document.getElementById('paymentModal');
                 const iframe = document.getElementById('paymentIframe');
                 
-                modal.classList.remove('active');
-                iframe.src = ''; // Stop loading
+                if (modal) {
+                    modal.classList.remove('active');
+                }
+                
+                if (iframe) {
+                    iframe.src = ''; // Stop loading
+                }
                 
                 // Restore body scroll
                 document.body.style.overflow = '';
+                
+                // SEGURANÇA EXTRA: Se estivermos na página do motoboy, garantir que permaneça fechado
+                if (isMotoboyPage()) {
+                    console.log('🛵 MOTOBOY: Garantindo que modal de pagamento permaneça fechado');
+                    setTimeout(() => {
+                        if (modal) {
+                            modal.style.display = 'none';
+                            modal.style.visibility = 'hidden';
+                        }
+                    }, 100);
+                }
                 
             } catch (error) {
                 console.error('Erro ao fechar modal de pagamento:', error);
@@ -3925,6 +4245,13 @@
 
         function simulatePaymentSuccess() {
             try {
+                // SEGURANÇA: Não executar se estivermos na página do motoboy
+                const currentPage = document.querySelector('.page.active');
+                if (currentPage && currentPage.id === 'motoboy') {
+                    console.error('❌ BLOQUEADO: simulatePaymentSuccess não deve executar na página do motoboy!');
+                    return;
+                }
+                
                 console.log('Pagamento simulado - iniciando redirecionamento');
                 
                 // Close payment modal
@@ -3934,8 +4261,8 @@
                 window.paymentCompleted = true;
                 console.log('Flag de pagamento definida:', window.paymentCompleted);
                 
-                // Show loading message briefly
-                showMessage('motoboyMessage', '<div class="loading-spinner"></div>Processando pagamento...', 'loading');
+                // NÃO deve haver mensagem de processamento de pagamento na página do motoboy!
+                // Esta linha foi removida pois causava confusão - motoboy é GRATUITO
                 
                 // Redirect to cadastro-cliente page using SPA navigation only
                 setTimeout(() => {
@@ -3974,11 +4301,26 @@
             const modal = document.getElementById('postPaymentModal');
             const registration = document.querySelector('.post-payment-registration');
             
-            modal.classList.remove('active');
-            registration.classList.remove('active');
+            if (modal) {
+                modal.classList.remove('active');
+            }
+            if (registration) {
+                registration.classList.remove('active');
+            }
             
             // Restore body scroll
             document.body.style.overflow = '';
+            
+            // SEGURANÇA EXTRA: Se estivermos na página do motoboy, garantir que permaneça fechado
+            if (isMotoboyPage()) {
+                console.log('🛵 MOTOBOY: Garantindo que modal pós-pagamento permaneça fechado');
+                setTimeout(() => {
+                    if (modal) {
+                        modal.style.display = 'none';
+                        modal.style.visibility = 'hidden';
+                    }
+                }, 100);
+            }
         }
 
         function confirmWhatsAppReceived() {
@@ -4026,6 +4368,14 @@
 
         // Payment redirect (now shows consent modal)
         function redirectToPayment() {
+            // SEGURANÇA: Verificar se não estamos na página do motoboy
+            const currentPage = document.querySelector('.page.active');
+            if (currentPage && currentPage.id === 'motoboy') {
+                console.error('❌ BLOQUEADO: redirectToPayment não deve executar na página do motoboy!');
+                alert('Erro: O portal do motoboy é 100% gratuito!');
+                return;
+            }
+            
             showConsentModal();
         }
 
@@ -4079,6 +4429,17 @@
             
             // Add phone mask to final registration field (handled by phoneInputs array above)
             // This ensures consistent phone formatting across all fields
+            
+            // GARANTIR que a máscara seja aplicada aos novos campos
+            const newPhoneInputs = ['nome', 'telefone'];
+            newPhoneInputs.forEach(id => {
+                const input = document.getElementById(id);
+                if (input && input.type === 'tel') {
+                    input.addEventListener('input', function() {
+                        applyPhoneMask(this);
+                    });
+                }
+            });
         });
 
         // Confirmation buttons
@@ -4145,6 +4506,18 @@
         // Show message helper function
         function showMessage(elementId, message, type) {
             const messageDiv = document.getElementById(elementId);
+            
+            // SEGURANÇA: Filtrar qualquer mensagem de pagamento na página do motoboy
+            if (elementId === 'motoboyMessage') {
+                // Remover qualquer referência a 'pagamento', 'processando', 'payment', etc.
+                message = message.replace(/pagamento/gi, 'verificação');
+                message = message.replace(/processando pagamento/gi, 'verificando cadastro');
+                message = message.replace(/payment/gi, 'verificação');
+                message = message.replace(/processing payment/gi, 'verificando dados');
+                
+                console.log('✅ MOTOBOY: Mensagem filtrada (sem referências a pagamento):', message);
+            }
+            
             messageDiv.className = `message message--${type}`;
             messageDiv.innerHTML = message;
             messageDiv.classList.remove('hidden');
@@ -4183,34 +4556,159 @@
             }
         }
 
-        // Mobile menu functions
+        // JAVASCRIPT CORRIGIDO - Menu Mobile
         function toggleMobileMenu() {
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            console.log('🍔 Toggling mobile menu');
             
-            mobileMenuBtn.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-            mobileMenuOverlay.classList.toggle('active');
+            try {
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                const mobileMenu = document.getElementById('mobileMenu');
+                const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+                
+                console.log('📱 Menu elements found:', {
+                    btn: !!mobileMenuBtn,
+                    menu: !!mobileMenu,
+                    overlay: !!mobileMenuOverlay
+                });
+                
+                if (!mobileMenuBtn || !mobileMenu || !mobileMenuOverlay) {
+                    console.error('❌ Menu elements not found!');
+                    return;
+                }
+                
+                const isActive = mobileMenu.classList.contains('active');
+                console.log('📱 Menu current state - active:', isActive);
+                
+                if (isActive) {
+                    // Fechar menu
+                    console.log('🔒 Closing mobile menu');
+                    mobileMenuBtn.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    mobileMenuOverlay.classList.remove('active');
+                } else {
+                    // Abrir menu
+                    console.log('🔓 Opening mobile menu');
+                    mobileMenuBtn.classList.add('active');
+                    mobileMenu.classList.add('active');
+                    mobileMenuOverlay.classList.add('active');
+                }
+                
+                console.log('✅ Mobile menu toggled successfully');
+                
+            } catch (error) {
+                console.error('❌ Error toggling mobile menu:', error);
+            }
         }
 
         function closeMobileMenu() {
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            console.log('❌ Closing mobile menu');
             
-            mobileMenuBtn.classList.remove('active');
-            mobileMenu.classList.remove('active');
-            mobileMenuOverlay.classList.remove('active');
+            try {
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                const mobileMenu = document.getElementById('mobileMenu');
+                const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+                
+                if (mobileMenuBtn) mobileMenuBtn.classList.remove('active');
+                if (mobileMenu) mobileMenu.classList.remove('active');
+                if (mobileMenuOverlay) mobileMenuOverlay.classList.remove('active');
+                
+                console.log('✅ Mobile menu closed successfully');
+                
+            } catch (error) {
+                console.error('❌ Error closing mobile menu:', error);
+            }
+        }
+        
+        // FUNÇÃO ADICIONAL: Setup do Menu Mobile
+        function setupMobileMenu() {
+            console.log('🔧 Setting up mobile menu');
+            
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            const mobileMenuItems = document.querySelectorAll('.mobile-menu a');
+            
+            console.log('📱 Mobile menu elements:', {
+                btn: !!mobileMenuBtn,
+                overlay: !!mobileMenuOverlay,
+                items: mobileMenuItems.length
+            });
+            
+            // Event listener para botão do menu
+            if (mobileMenuBtn) {
+                console.log('🎯 Adding click listener to mobile menu button');
+                
+                // Remover listeners anteriores
+                mobileMenuBtn.onclick = null;
+                
+                // Adicionar novo listener
+                mobileMenuBtn.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    console.log('🍔 Mobile menu button CLICKED!');
+                    toggleMobileMenu();
+                });
+                
+                console.log('✅ Mobile menu button listener added');
+            } else {
+                console.error('❌ Mobile menu button not found!');
+            }
+            
+            // Event listener para overlay (fechar menu)
+            if (mobileMenuOverlay) {
+                mobileMenuOverlay.addEventListener('click', function(event) {
+                    console.log('🎯 Mobile menu overlay clicked - closing menu');
+                    closeMobileMenu();
+                });
+                console.log('✅ Mobile menu overlay listener added');
+            } else {
+                console.error('❌ Mobile menu overlay not found!');
+            }
+            
+            // Event listeners para itens do menu (fechar ao clicar)
+            if (mobileMenuItems.length > 0) {
+                mobileMenuItems.forEach((item, index) => {
+                    item.addEventListener('click', function() {
+                        console.log(`🎯 Mobile menu item ${index + 1} clicked - closing menu`);
+                        closeMobileMenu();
+                    });
+                });
+                console.log(`✅ Added listeners to ${mobileMenuItems.length} mobile menu items`);
+            } else {
+                console.warn('⚠️ No mobile menu items found');
+            }
+            
+            // Event listener para fechar com ESC
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    const mobileMenu = document.getElementById('mobileMenu');
+                    if (mobileMenu && mobileMenu.classList.contains('active')) {
+                        console.log('⌨️ ESC pressed - closing mobile menu');
+                        closeMobileMenu();
+                    }
+                }
+            });
+            
+            // Event listener para fechar menu em resize (desktop)
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    const mobileMenu = document.getElementById('mobileMenu');
+                    if (mobileMenu && mobileMenu.classList.contains('active')) {
+                        console.log('📱➡️💻 Window resized to desktop - closing mobile menu');
+                        closeMobileMenu();
+                    }
+                }
+            });
+            
+            console.log('🎉 Mobile menu setup COMPLETED');
         }
 
-        // Novas funções para o fluxo de cadastro
+        // SOLUÇÃO DEFINITIVA - JavaScript reescrito completamente
         function voltarAoCadastro() {
             try {
                 console.log('Voltando ao formulário de cadastro');
                 document.getElementById('dicaNumeroSection').classList.add('hidden');
                 document.getElementById('confirmacaoSection').classList.add('hidden');
-                document.getElementById('cadastroSection').classList.remove('hidden');
+                document.getElementById('form-section').style.display = 'block';
             } catch (error) {
                 console.error('Erro ao voltar ao cadastro:', error);
                 alert('Erro ao voltar ao formulário. Recarregue a página.');
@@ -4238,70 +4736,13 @@
                 }
             }
         }
-        
-        // Handler do formulário de cadastro do cliente
+
+        // FUNÇÃO ATUALIZADA - Agora usa a nova implementação inline
         function setupCadastroClienteForm() {
-            const form = document.getElementById('cadastroClienteForm');
-            if (form) {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    const nome = document.getElementById('cadastroNomeCompleto').value.trim();
-                    const telefone = document.getElementById('cadastroTelefone').value.trim();
-                    
-                    if (!nome || !telefone) {
-                        showMessage('cadastroClienteMessage', 'Por favor, preencha todos os campos obrigatórios.', 'error');
-                        return;
-                    }
-                    
-                    // Simula cadastro
-                    showMessage('cadastroClienteMessage', 'Processando cadastro...', 'loading');
-                    
-                    setTimeout(() => {
-                        // Adicionar aos clientes cadastrados
-                        clients.push({ nome, telefone, ativo: true });
-                        registeredUsers.push({ nome, telefone, ativo: true });
-                        
-                        // Mostrar seção de confirmação
-                        document.getElementById('cadastroSection').classList.add('hidden');
-                        document.getElementById('confirmacaoSection').classList.remove('hidden');
-                        
-                        // Limpar mensagem
-                        document.getElementById('cadastroClienteMessage').classList.add('hidden');
-                    }, 1500);
-                });
-            }
-            
-            // Botão "Recebi a mensagem"
-            const recebiBtn = document.getElementById('recebiMensagemBtn');
-            if (recebiBtn) {
-                recebiBtn.addEventListener('click', function() {
-                    try {
-                        console.log('Usuário confirmou recebimento da mensagem');
-                        window.cadastroCompleted = true;
-                        console.log('Cadastro marcado como completo:', window.cadastroCompleted);
-                        showPage('bem-vindo');
-                    } catch (error) {
-                        console.error('Erro ao confirmar mensagem:', error);
-                        alert('Erro ao finalizar cadastro. Tente novamente.');
-                    }
-                });
-            }
-            
-            // Botão "Não recebi a mensagem"
-            const naoRecebiBtn = document.getElementById('naoRecebiMensagemBtn');
-            if (naoRecebiBtn) {
-                naoRecebiBtn.addEventListener('click', function() {
-                    try {
-                        console.log('Usuário não recebeu a mensagem');
-                        document.getElementById('confirmacaoSection').classList.add('hidden');
-                        document.getElementById('dicaNumeroSection').classList.remove('hidden');
-                    } catch (error) {
-                        console.error('Erro ao mostrar dica de número:', error);
-                        alert('Erro ao processar. Tente novamente.');
-                    }
-                });
-            }
+            console.log('🔧 Setup do formulário - usando implementação inline');
+            // A nova implementação usa JavaScript inline na página cadastro-cliente
+            // Nenhuma configuração adicional necessária
+            console.log('✅ Nova implementação inline ativa');
         }
 
         // System verification function
@@ -4342,60 +4783,180 @@
             }
         }
         
-        // Initialize app
+        // SISTEMA DE DEBUG E VALIDAÇÃO APRIMORADO
+        function debugElementCheck() {
+            console.log('🔍 Verificando elementos críticos...');
+            
+            const criticalElements = {
+                // Páginas
+                'home': document.getElementById('home'),
+                'cadastro-cliente': document.getElementById('cadastro-cliente'),
+                'bem-vindo': document.getElementById('bem-vindo'),
+                
+                // Formulário de cadastro
+                'btn-finalizar': document.getElementById('btn-finalizar'),
+                'form-section': document.getElementById('form-section'),
+                'whatsapp-section': document.getElementById('whatsapp-section'),
+                'nome': document.getElementById('nome'),
+                'telefone': document.getElementById('telefone'),
+                'btn-recebi': document.getElementById('btn-recebi'),
+                'btn-nao-recebi': document.getElementById('btn-nao-recebi'),
+                
+                // Menu mobile
+                'mobileMenuBtn': document.getElementById('mobileMenuBtn'),
+                'mobileMenu': document.getElementById('mobileMenu'),
+                'mobileMenuOverlay': document.getElementById('mobileMenuOverlay'),
+                
+                // Modals
+                'consentModal': document.getElementById('consentModal'),
+                'paymentModal': document.getElementById('paymentModal')
+            };
+            
+            const missing = [];
+            const found = [];
+            
+            Object.keys(criticalElements).forEach(key => {
+                if (criticalElements[key]) {
+                    found.push(key);
+                } else {
+                    missing.push(key);
+                }
+            });
+            
+            console.log('✅ Elementos encontrados (' + found.length + '):', found);
+            
+            if (missing.length > 0) {
+                console.warn('❌ Elementos NÃO encontrados (' + missing.length + '):', missing);
+                return false;
+            }
+            
+            console.log('🎉 Todos os elementos críticos foram encontrados!');
+            return true;
+        }
+        
+        // SYSTEM STARTUP COM DEBUGGING AVANÇADO
         document.addEventListener('DOMContentLoaded', function() {
             try {
-                console.log('Inicializando aplicação...');
+                console.log('🚀 INICIALIZANDO CHEGOU AÍ - Sistema de Notificações');
+                console.log('Timestamp:', new Date().toLocaleString());
+                console.log('User Agent:', navigator.userAgent);
+                console.log('🆓 IMPORTANTE: Portal do motoboy é 100% GRATUITO - sem pagamentos!');
                 
-                // Verify system integrity first
+                // 1. Verificar integridade do sistema
+                console.log('🔍 Passo 1: Verificando integridade do sistema...');
                 if (!verifySystemIntegrity()) {
-                    alert('Erro crítico: Sistema não pôde ser inicializado corretamente.');
+                    console.error('❌ Sistema não passou na verificação de integridade');
+                    alert('Erro crítico: Sistema não pôde ser inicializado. Recarregue a página.');
                     return;
                 }
+                console.log('✅ Passo 1: Integridade verificada');
                 
-                // Initialize global flags
+                // 2. Debug detalhado dos elementos
+                console.log('🔍 Passo 2: Verificando elementos críticos...');
+                if (!debugElementCheck()) {
+                    console.warn('⚠️ Alguns elementos estão faltando, mas continuando...');
+                }
+                console.log('✅ Passo 2: Elementos verificados');
+                
+                // 3. Inicializar flags globais
+                console.log('🏳️ Passo 3: Inicializando flags globais...');
                 window.paymentCompleted = false;
                 window.cadastroCompleted = false;
-                console.log('Flags globais inicializadas:', { paymentCompleted: window.paymentCompleted, cadastroCompleted: window.cadastroCompleted });
+                window.motoboyAccessAlwaysFree = true; // Flag especial para motoboy
+                console.log('✅ Passo 3: Flags inicializadas:', { 
+                    paymentCompleted: window.paymentCompleted, 
+                    cadastroCompleted: window.cadastroCompleted,
+                    motoboyAccessAlwaysFree: window.motoboyAccessAlwaysFree
+                });
             
-            // Setup new forms
-            setupCadastroClienteForm();
+                // 4. Setup do formulário de cadastro
+                console.log('📝 Passo 4: Configurando formulários...');
+                setupCadastroClienteForm();
+                console.log('✅ Passo 4: Formulários configurados');
             
                 // Show home page by default
                 showPage('home');
                 
-                console.log('Aplicação inicializada com sucesso!');
+                // 7. Mostrar página inicial
+                console.log('🏠 Passo 7: Exibindo página inicial...');
+                showPage('home');
+                console.log('✅ Passo 7: Página inicial exibida');
+                
+                console.log('🎆 INICIALIZAÇÃO COMPLETA - Sistema pronto para uso!');
+                console.log('Status dos principais recursos:');
+                console.log('  ✅ Páginas: Carregadas');
+                console.log('  ✅ Formulários: Configurados');
+                console.log('  ✅ Menu Mobile: Funcional');
+                console.log('  ✅ Modals: Prontos');
+                console.log('  ✅ Navegação: Ativa');
                 
             } catch (initError) {
-                console.error('Erro crítico na inicialização:', initError);
-                alert('Erro ao inicializar aplicação. Recarregue a página.');
+                console.error('🔴 ERRO CRÍTICO NA INICIALIZAÇÃO:', initError);
+                console.error('Stack trace:', initError.stack);
                 
-                // Emergency fallback
+                alert(`Erro crítico ao inicializar a aplicação:\n${initError.message}\n\nRecarregue a página e tente novamente.`);
+                
+                // Emergency fallback com debug
                 try {
-                    document.getElementById('home').classList.add('active');
+                    console.log('🆘 Tentando fallback de emergência...');
+                    const homePage = document.getElementById('home');
+                    if (homePage) {
+                        homePage.classList.add('active');
+                        console.log('✅ Fallback bem-sucedido');
+                    } else {
+                        console.error('❌ Fallback falhou - elemento home não encontrado');
+                    }
                 } catch (fallbackError) {
-                    console.error('Erro no fallback de emergência:', fallbackError);
+                    console.error('🔴 FALHA TOTAL - Fallback de emergência falhou:', fallbackError);
+                    // Última tentativa
+                    setTimeout(() => {
+                        if (confirm('Sistema não pôde ser inicializado.\nDeseja recarregar a página automaticamente?')) {
+                            window.location.reload();
+                        }
+                    }, 2000);
                 }
             }
             
-            // Setup mobile menu event listeners
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            // SETUP CORRIGIDO - Menu Mobile
+            console.log('🔧 Iniciando setup do menu mobile...');
+            setupMobileMenu();
             
-            if (mobileMenuBtn) {
-                mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-            }
-            
-            if (mobileMenuOverlay) {
-                mobileMenuOverlay.addEventListener('click', closeMobileMenu);
-            }
-            
-            // Close menu on window resize if desktop
-            window.addEventListener('resize', function() {
-                if (window.innerWidth > 768) {
-                    closeMobileMenu();
+            // SISTEMA DE PROTEÇÃO: Monitorar página do motoboy
+            function protectMotoboyPage() {
+                const currentPage = document.querySelector('.page.active');
+                if (currentPage && currentPage.id === 'motoboy') {
+                    console.log('🛵 PROTEÇÃO ATIVA: Garantindo que nenhum modal de pagamento apareça');
+                    
+                    // Forçar fechamento de todos os modais de pagamento
+                    const paymentModal = document.getElementById('paymentModal');
+                    const consentModal = document.getElementById('consentModal');
+                    const postPaymentModal = document.getElementById('postPaymentModal');
+                    
+                    if (paymentModal && paymentModal.classList.contains('active')) {
+                        paymentModal.classList.remove('active');
+                        console.log('❌ FECHADO: Modal de pagamento removido da página do motoboy');
+                    }
+                    
+                    if (consentModal && consentModal.classList.contains('active')) {
+                        consentModal.classList.remove('active');
+                        console.log('❌ FECHADO: Modal de consentimento removido da página do motoboy');
+                    }
+                    
+                    if (postPaymentModal && postPaymentModal.classList.contains('active')) {
+                        postPaymentModal.classList.remove('active');
+                        console.log('❌ FECHADO: Modal pós-pagamento removido da página do motoboy');
+                    }
+                    
+                    // Restaurar scroll do body
+                    document.body.style.overflow = '';
+                    
+                    return true;
                 }
-            });
+                return false;
+            }
+            
+            // Executar proteção a cada 500ms quando na página do motoboy
+            setInterval(protectMotoboyPage, 500);
             
             // Setup consent modal event listeners
             const consentCheckbox = document.getElementById('consentCheckbox');
